@@ -1,0 +1,54 @@
+package akashy;
+import java.util.Random;
+import java.util.Scanner;
+public class GuessTheNumber {
+	public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        int score = 0;
+        
+        System.out.println("Welcome to Guess the Number!");
+        
+        do {
+            int generatedNumber = random.nextInt(100) + 1;
+            int attempts = 0;
+            
+            System.out.println("\nNew round! Guess a number between 1 and 100.");
+            
+            while (true) {
+                System.out.print("Enter your guess: ");
+                int userGuess = scanner.nextInt();
+                attempts++;
+                
+                if (userGuess == generatedNumber) {
+                    System.out.println("Congratulations! You guessed the correct number.");
+                    score += 100 - (attempts * 10); // Calculate score based on attempts
+                    break;
+                } else if (userGuess < generatedNumber) {
+                    System.out.println("Too low! Try a higher number.");
+                } else {
+                    System.out.println("Too high! Try a lower number.");
+                }
+                
+                if (attempts >= 10) {
+                    System.out.println("You have reached the maximum number of attempts. The correct number was: " + generatedNumber);
+                    break;
+                }
+            }
+            
+            System.out.println("Current score: " + score);
+            
+            System.out.print("Do you want to play again? (yes/no): ");
+            String playAgain = scanner.next();
+            
+            if (!playAgain.equalsIgnoreCase("yes")) {
+                break;
+            }
+        } while (true);
+        
+        System.out.println("Thanks for playing Guess the Number!");
+    }
+}
+
+
+
